@@ -1,12 +1,21 @@
-interface Person {
-    firstName: string;
-    lastName: string;
+import axios,{
+    AxiosResponse, AxiosError
+} from "../../node_modules/axios/index";
+import {Icar} from "./Icar";
+
+let ContentElement: HTMLDivElement = <HTMLDivElement> document.getElementById("content");
+
+function ShowAllCars():void {
+    axios.get<Icar[]>("https://webapicar20190326034339.azurewebsites.net/api/car")
+        .then(function (response: AxiosResponse<Icar[]>) : void {
+            console.log(response)
+        })
+        .catch(function (error: AxiosError) : void {
+            console.error(error.message)
+        })
 }
 
-function greeter(person: Person): string {
-    return "Hello, " + person.firstName + " " + person.lastName;
+function UpdateOneCar():void{
+    axios.put<Icar[]>("https://webapicar20190326034339.azurewebsites.net/api/car")
 }
-let user: Person = { firstName: "John", lastName: "Doe" };
-
-let element: HTMLDivElement = <HTMLDivElement> document.getElementById("content");
-element.innerHTML = greeter(user);
+ShowAllCars();
