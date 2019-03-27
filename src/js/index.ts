@@ -5,10 +5,14 @@ import {Icar} from "./Icar";
 
 let ContentElement: HTMLDivElement = <HTMLDivElement> document.getElementById("content");
 let GetAllCarsButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("GetAllButton");
-GetAllCarsButton.addEventListener("click", ShowAllCars)
+GetAllCarsButton.addEventListener("click", ShowAllCars);
 
-let AddCarButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("addButton")
-AddCarButton.addEventListener("click",AddACar)
+let AddCarButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("addButton");
+AddCarButton.addEventListener("click",AddACar);
+
+let DeleteButton: HTMLButtonElement = <HTMLButtonElement> document.getElementById("deleteButton");
+DeleteButton.addEventListener("click", AddACar);
+
 function ShowAllCars():void {
     axios.get<Icar[]>("https://webapicar20190326034339.azurewebsites.net/api/cars")
         .then(function (response: AxiosResponse<Icar[]>) : void {
@@ -43,4 +47,8 @@ function AddACar(): void {
         .catch(function (error : AxiosError) : void {
             console.log(error.message)
         })
+}
+function DeleteAllCars(): void {
+    let car: Icar
+    axios.delete<Icar>("https://webapicar20190326034339.azurewebsites.net/api/cars/")
 }
